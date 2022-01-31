@@ -1,11 +1,9 @@
 import { createStore, combineReducers } from "redux";
 
-import { example } from "./Reducers/example.reducer";
+import { handlePopUp } from "./Reducers/popup.reducer";
 
 export const ConfigureStore = () => {
-  const store = createStore(
-    combineReducers({ example }),
-  );
+  const store = createStore(combineReducers({ handlePopUp }));
 
   return store;
 };

@@ -1,1 +1,1 @@
-export const EXAMPLE_ACTION = "EXAMPLE_ACTION";
+export const HANDLE_POP_UP = "HANDLE_POP_UP";
