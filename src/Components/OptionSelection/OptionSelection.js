@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import addNode from "../../Utils/Helpers/addNode";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const SubOptionSelection = ({ name, callerFunction }) => {
   return (
@@ -15,13 +15,24 @@ const OptionSelection = () => {
     (state) => state.handleNode.initialElements
   );
   const edgeId = useSelector((state) => state.handlePopUp.edgeId);
-
+  const dispatch = useDispatch();
   return (
     <div>
       <SubOptionSelection
         name="Email"
         callerFunction={() => {
-          addNode(initialElements, edgeId);
+          const tempInitialElement = addNode(
+            initialElements,
+            edgeId,
+            "default",
+            true,
+            "correct"
+          );
+          dispatch({
+            type: "INITIAL_ELEMENTS",
+            initialElements: tempInitialElement,
+          });
+          document.getElementById("LayoutButton").click();
         }}
       />
     </div>

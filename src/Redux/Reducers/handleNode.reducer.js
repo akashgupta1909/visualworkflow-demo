@@ -9,21 +9,33 @@ export const handleNode = (
         data: { label: "Input 1" },
         position: { x: 0, y: 0 },
       },
-      { id: "2", data: { label: "Node 2" }, position: { x: 0, y: 200 } },
-      { id: "3", data: { label: "Node 3" }, position: { x: 0, y: 400 } },
+      { id: "2", data: { label: "Node 2" }, position: { x: 0, y: 0 } },
+      {
+        id: "3",
+        data: { label: "Node 3" },
+        type: "selectorNode",
+        position: { x: 0, y: 0 },
+      },
 
       {
-        id: "1",
+        id: "1-2",
         source: "1",
         target: "2",
         type: "buttonedge",
       },
       {
-        id: "2",
+        id: "2-3",
         source: "2",
         target: "3",
-        type: "buttonedge",
+        type: "smoothedge",
       },
+
+      // {
+      //   id: "2-3",
+      //   source: "2",
+      //   target: "3",
+      //   type: "buttonedge",
+      // },
     ],
   },
   action
