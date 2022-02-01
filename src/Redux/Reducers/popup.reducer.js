@@ -1,8 +1,9 @@
-import { HANDLE_POP_UP } from "../ActionTypes";
+import { HANDLE_POP_UP, HANDLE_EDGE_CLICK } from "../ActionTypes";
 
 export const handlePopUp = (
   state = {
-    popUpState: true,
+    popUpState: false,
+    edgeId: "",
   },
   action
 ) => {
@@ -11,6 +12,12 @@ export const handlePopUp = (
       return {
         ...state,
         popUpState: action.popUpState,
+      };
+    }
+    case HANDLE_EDGE_CLICK: {
+      return {
+        ...state,
+        edgeId: action.edgeId,
       };
     }
     default:

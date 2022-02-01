@@ -1,41 +1,20 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import ReactFlow, {
-  removeElements,
-  addEdge,
-  MiniMap,
-  Controls,
-  Background,
-} from "react-flow-renderer";
+import ReactFlow from "react-flow-renderer";
 
 import styles from "./Home.module.css";
 import ButtonEdge from "../../Components/ButtonEdge";
 import PopUp from "./../../Components/PopUp";
+import OptionSelection from "../../Components/OptionSelection";
 
 const onLoad = (reactFlowInstance) => reactFlowInstance.fitView();
-const initialElements = [
-  {
-    id: "node-1",
-    type: "input",
-    data: { label: "Input 1" },
-    position: { x: 250, y: 0 },
-  },
-  { id: "node-2", data: { label: "Node 2" }, position: { x: 250, y: 200 } },
-
-  {
-    id: "edge-1-2",
-    source: "node-1",
-    target: "node-2",
-    type: "buttonedge",
-  },
-];
 
 const edgeTypes = {
   buttonedge: ButtonEdge,
 };
 
 const Home = () => {
-  const [elements, setElements] = useState(initialElements);
+  const elements = useSelector((state) => state.handleNode.initialElements);
   const popUpState = useSelector((state) => state.handlePopUp.popUpState);
   const dispatch = useDispatch();
 
@@ -50,7 +29,7 @@ const Home = () => {
         ></ReactFlow>
       </div>
       <PopUp
-        ContentComp={<></>}
+        ContentComp={<OptionSelection />}
         isOpen={popUpState}
         closeFun={() => {
           dispatch({ type: "HANDLE_POP_UP", popUpState: false });
