@@ -1,8 +1,4 @@
-.container {
-  height: 100vh;
-  width: 100vw;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
+#ReactFlowWrapper {
+  height: 90vh;
+  width: 100%;
 }

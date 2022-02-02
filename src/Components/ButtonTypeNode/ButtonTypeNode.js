@@ -31,12 +31,6 @@ const ButtonTypeNode = ({ id, data, isConnectable }) => {
       >
         +
       </button>
-      {/* <Handle
-        type="source"
-        position="bottom"
-        className={styles.Handle}
-        isConnectable={false}
-      /> */}
     </div>
   );
 };

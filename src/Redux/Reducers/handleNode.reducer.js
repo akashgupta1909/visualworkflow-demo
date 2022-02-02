@@ -9,7 +9,12 @@ export const handleNode = (
         data: { label: "Input 1" },
         position: { x: 0, y: 0 },
       },
-      { id: "2", data: { label: "Node 2" }, position: { x: 0, y: 0 } },
+      {
+        id: "2",
+        type: "smsNode",
+        data: { label: "Node 2" },
+        position: { x: 0, y: 0 },
+      },
       {
         id: "3",
         data: { label: "Node 3" },

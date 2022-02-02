@@ -56,7 +56,7 @@ html {
   --aqua: #54b7ff;
   --sec-aqua: rgba(207, 245, 255, 1);
 
-  --dark-aqua: rgba(177, 220, 252, 0.54);
+  --dark-aqua: rgba(0, 87, 153, 0.54);
   --dark-green: rgba(51, 214, 0, 0.34);
   --blue-gradient: linear-gradient(
     84.96deg,

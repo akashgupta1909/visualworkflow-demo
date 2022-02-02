@@ -1,9 +1,15 @@
-import { HANDLE_POP_UP, HANDLE_EDGE_CLICK } from "../ActionTypes";
+import {
+  HANDLE_POP_UP,
+  HANDLE_EDGE_CLICK,
+  HANDLE_COMPONENT_RENDER,
+} from "../ActionTypes";
+import OptionSelection from "../../Components/OptionSelection";
 
 export const handlePopUp = (
   state = {
     popUpState: false,
     edgeId: "",
+    componentToRender: <OptionSelection />,
   },
   action
 ) => {
@@ -18,6 +24,12 @@ export const handlePopUp = (
       return {
         ...state,
         edgeId: action.edgeId,
+      };
+    }
+    case HANDLE_COMPONENT_RENDER: {
+      return {
+        ...state,
+        componentToRender: action.componentToRender,
       };
     }
     default:
