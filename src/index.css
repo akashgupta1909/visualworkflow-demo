@@ -54,7 +54,9 @@ html {
   --orange-secondary: #ff8e09;
   --orange-tertiary: #ffd098;
   --aqua: #54b7ff;
+  --light-aqua: #d2f1ff;
   --sec-aqua: rgba(207, 245, 255, 1);
+  --red: #ff0000;
 
   --dark-aqua: rgba(0, 87, 153, 0.54);
   --dark-green: rgba(51, 214, 0, 0.34);

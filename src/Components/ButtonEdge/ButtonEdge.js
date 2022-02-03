@@ -5,6 +5,7 @@ import {
   getMarkerEnd,
 } from "react-flow-renderer";
 import { useDispatch } from "react-redux";
+import OptionSelection from "../OptionSelection";
 
 import styles from "./ButtonEdge.module.css";
 
@@ -66,6 +67,10 @@ function ButtonEdge({
             className={styles.Button}
             onClick={(event) => {
               dispatch({ type: "HANDLE_POP_UP", popUpState: true });
+              dispatch({
+                type: "HANDLE_COMPONENT_RENDER",
+                componentToRender: <OptionSelection />,
+              });
               onEdgeClick(event, id);
             }}
           >

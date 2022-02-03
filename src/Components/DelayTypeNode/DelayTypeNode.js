@@ -1,29 +1,27 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
+import styles from "./DelayTypeNode.module.css";
 import { Handle } from "react-flow-renderer";
 import { useDispatch } from "react-redux";
-import styles from "./SmsTypeNode.module.css";
 import PopUpComponent from "./PopUpComponent";
 
-function SmsTypeNode() {
-  const [smsDetails, setSmsDetails] = useState({
-    name: "",
-    smsBody: "",
+const DelayTypeNode = () => {
+  const [delayDetails, setDelayDetails] = useState({
+    amount: "1",
+    delay: "hour(s)",
   });
-  const dispatch = useDispatch();
-
-  const handleOnChange = (smsDetails) => {
-    setSmsDetails(smsDetails);
+  const handleOnChange = (delayDetails) => {
+    setDelayDetails(delayDetails);
   };
-
-  const handleClick = (event) => {
+  const dispatch = useDispatch();
+  const handleOnClick = (event) => {
     event.stopPropagation();
     dispatch({
       type: "HANDLE_COMPONENT_RENDER",
       componentToRender: (
         <PopUpComponent
           handleOnChange={handleOnChange}
-          inputSmsBody={smsDetails.smsBody}
-          inputName={smsDetails.name}
+          inputAmount={delayDetails.amount}
+          inputDelay={delayDetails.delay}
         />
       ),
     });
@@ -33,14 +31,16 @@ function SmsTypeNode() {
   return (
     <div className={styles.WrapperWrapper}>
       <div className={styles.Wrapper}>
-        <h2 className={styles.Heading}>SMS Workflow</h2>
-        <button onClick={handleClick}>Edit SMS Details</button>
-        <button>Select SMS Template</button>
+        <h2 className={styles.Heading}>Delay</h2>
+        <p>
+          {delayDetails.amount} {delayDetails.delay}
+        </p>
+        <button onClick={handleOnClick}>Edit Delay</button>
       </div>
       <Handle type="target" position="top" className={styles.Handle} />
       <Handle type="source" position="bottom" className={styles.Handle} />
     </div>
   );
-}
+};
 
-export default SmsTypeNode;
+export default DelayTypeNode;

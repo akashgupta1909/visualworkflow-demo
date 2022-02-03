@@ -49,13 +49,13 @@ const addNodeWithCondition = (
   }
   const correctNode = {
     id: `${numberOfNodes + 2}`,
-    type: nodeType,
+    type: "correctNode",
     data: { label: `${nodeType} Correct ${numberOfNodes + 2}` },
     position: { x: 0, y: 0 },
   };
   const wrongNode = {
     id: `${numberOfNodes + 3}`,
-    type: nodeType,
+    type: "wrongNode",
     data: { label: `${nodeType} Wrong ${numberOfNodes + 3}` },
     position: { x: 0, y: 0 },
   };
@@ -128,13 +128,13 @@ const addNodeWithCondtionLeaf = (initialElements, nodeId, nodeType) => {
   };
   const correctNode = {
     id: `${numberOfNodes + 2}`,
-    type: nodeType,
+    type: "correctNode",
     data: { label: `${nodeType} Correct ${numberOfNodes + 2}` },
     position: { x: 0, y: 0 },
   };
   const wrongNode = {
     id: `${numberOfNodes + 3}`,
-    type: nodeType,
+    type: "wrongNode",
     data: { label: `${nodeType} Wrong ${numberOfNodes + 3}` },
     position: { x: 0, y: 0 },
   };

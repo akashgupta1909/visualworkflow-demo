@@ -10,6 +10,7 @@
   align-items: center;
   gap: 1rem;
 }
+
 .Wrapper button {
   background-color: var(--white);
   outline: none;
@@ -20,4 +21,8 @@
   cursor: pointer;
   font-size: var(--font-14);
   font-weight: 500;
+  transition: background-color 0.15s ease-in-out;
+}
+.Wrapper button:hover {
+  background-color: var(--light-aqua);
 }

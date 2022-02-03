@@ -3,6 +3,7 @@ import React from "react";
 import { Handle } from "react-flow-renderer";
 import styles from "./ButtonTypeNode.module.css";
 import { useDispatch } from "react-redux";
+import OptionSelection from "../OptionSelection";
 
 const ButtonTypeNode = ({ id, data, isConnectable }) => {
   const dispatch = useDispatch();
@@ -12,6 +13,7 @@ const ButtonTypeNode = ({ id, data, isConnectable }) => {
   };
   return (
     <div
+      className={styles.WrapperWrapper}
       style={
         {
           // width: 150,
@@ -26,6 +28,10 @@ const ButtonTypeNode = ({ id, data, isConnectable }) => {
         className={styles.Button}
         onClick={(event) => {
           dispatch({ type: "HANDLE_POP_UP", popUpState: true });
+          dispatch({
+            type: "HANDLE_COMPONENT_RENDER",
+            componentToRender: <OptionSelection />,
+          });
           onEdgeClick(event, id);
         }}
       >

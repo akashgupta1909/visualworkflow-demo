@@ -1,13 +1,9 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styles from "./OptionSelection.module.css";
 import SubOptionSelection from "./SubOptionSelction";
 
 import addNode from "../../Utils/Helpers/addNode";
-
-// import TextsmsIcon from "@mui/icons-material/Textsms";
-// import AccessTimeFilledIcon from "@mui/icons-material/AccessTimeFilled";
-// import SwapCallsIcon from "@mui/icons-material/SwapCalls";
 
 const OptionSelection = () => {
   const initialElements = useSelector(
@@ -21,24 +17,82 @@ const OptionSelection = () => {
       <div className={styles.Wrapper}>
         <SubOptionSelection
           name="sms"
-          // svgIcon={TextsmsIcon}
-          // callerFunction={() => {
-          //   const tempInitialElement = addNode(
-          //     initialElements,
-          //     edgeId,
-          //     "default",
-          //     true,
-          //     "correct"
-          //   );
-          //   dispatch({
-          //     type: "INITIAL_ELEMENTS",
-          //     initialElements: tempInitialElement,
-          //   });
-          //   document.getElementById("LayoutButton").click();
-          // }}
+          callerFunction={() => {
+            const tempInitialElement = addNode(
+              initialElements,
+              edgeId,
+              "smsNode",
+              false,
+              "correct"
+            );
+            setTimeout(() => {
+              dispatch({
+                type: "INITIAL_ELEMENTS",
+                initialElements: tempInitialElement,
+              });
+              dispatch({
+                type: "HANDLE_POP_UP",
+                popUpState: false,
+              });
+            }, 100);
+            setTimeout(() => {
+              document.getElementById("LayoutButton").click();
+              document.getElementById("LayoutButton").click();
+            }, 200);
+          }}
         />
-        <SubOptionSelection name="delay" />
-        <SubOptionSelection name="condition" />
+        <SubOptionSelection
+          name="delay"
+          callerFunction={() => {
+            const tempInitialElement = addNode(
+              initialElements,
+              edgeId,
+              "delayNode",
+              false,
+              "correct"
+            );
+            setTimeout(() => {
+              dispatch({
+                type: "INITIAL_ELEMENTS",
+                initialElements: tempInitialElement,
+              });
+              dispatch({
+                type: "HANDLE_POP_UP",
+                popUpState: false,
+              });
+            }, 100);
+            setTimeout(() => {
+              document.getElementById("LayoutButton").click();
+              document.getElementById("LayoutButton").click();
+            }, 200);
+          }}
+        />
+        <SubOptionSelection
+          name="condition"
+          callerFunction={() => {
+            const tempInitialElement = addNode(
+              initialElements,
+              edgeId,
+              "conditionNode",
+              true,
+              "wrong"
+            );
+            setTimeout(() => {
+              dispatch({
+                type: "INITIAL_ELEMENTS",
+                initialElements: tempInitialElement,
+              });
+              dispatch({
+                type: "HANDLE_POP_UP",
+                popUpState: false,
+              });
+            }, 100);
+            setTimeout(() => {
+              document.getElementById("LayoutButton").click();
+              document.getElementById("LayoutButton").click();
+            }, 200);
+          }}
+        />
       </div>
     </div>
   );

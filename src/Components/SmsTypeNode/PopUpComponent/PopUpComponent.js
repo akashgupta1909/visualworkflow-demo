@@ -3,12 +3,7 @@ import { useDispatch } from "react-redux";
 import OptionSelection from "../../OptionSelection";
 import styles from "./PopUpComponent.module.css";
 
-function PopUpComponent({
-  handleOnChange,
-
-  inputName,
-  inputSmsBody,
-}) {
+function PopUpComponent({ handleOnChange, inputName, inputSmsBody }) {
   const details = useRef(null);
   const handleChange = (event) => {
     event.preventDefault();
@@ -42,8 +37,6 @@ function PopUpComponent({
         autoComplete="off"
         placeholder="Name"
         defaultValue={inputName}
-        // defaultValue={inputName}
-        // defaultValue={smsDetails.name}
         onChange={handleChange}
       />
       <textarea
@@ -54,8 +47,6 @@ function PopUpComponent({
         maxLength="160"
         placeholder="Body(Max 160 Char)"
         defaultValue={inputSmsBody}
-        // value={smsDetails.smsBody}
-        // defaultValue={inputSmsBody}
         onChange={handleChange}
       />
       <button>Save</button>

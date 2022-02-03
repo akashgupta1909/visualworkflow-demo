@@ -1,10 +1,14 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ReactFlow, {
   ReactFlowProvider,
   addEdge,
   removeElements,
   isNode,
+  useStoreState,
+  Background,
+  MiniMap,
+  Controls,
 } from "react-flow-renderer";
 import dagre from "dagre";
 
@@ -14,8 +18,17 @@ import PopUp from "./../../Components/PopUp";
 import OptionSelection from "../../Components/OptionSelection";
 import ButtonTypeNode from "../../Components/ButtonTypeNode";
 import SmsTypeNode from "../../Components/SmsTypeNode";
+import ConditionTypeNode from "../../Components/ConditionTypeNode";
+import DelayTypeNode from "../../Components/DelayTypeNode";
+import CorrectNodeType from "../../Components/ConditionNodeType/CorrectNodeType";
+import WrongNodeType from "./../../Components/ConditionNodeType/WrongNodeType";
 
-// const onLoad = (reactFlowInstance) => reactFlowInstance.fitView();
+const NodeDetails = () => {
+  const dispatch = useDispatch();
+  const nodes = useStoreState((state) => state.nodes);
+  dispatch({ type: "SET_NODES", nodes: nodes });
+  return <></>;
+};
 
 const edgeTypes = {
   buttonedge: ButtonEdge,
@@ -23,32 +36,47 @@ const edgeTypes = {
 const nodeTypes = {
   selectorNode: ButtonTypeNode,
   smsNode: SmsTypeNode,
+  conditionNode: ConditionTypeNode,
+  delayNode: DelayTypeNode,
+  correctNode: CorrectNodeType,
+  wrongNode: WrongNodeType,
 };
 
 const Home = () => {
   const dagreGraph = new dagre.graphlib.Graph();
   dagreGraph.setDefaultEdgeLabel(() => ({}));
+  const triggerRef = useRef(null);
   const nodeWidth = 150;
-  const nodeHeight = 100;
+  const nodeHeight = 200;
 
   const elements = useSelector((state) => state.handleNode.initialElements);
   const popUpState = useSelector((state) => state.handlePopUp.popUpState);
   const componentToRender = useSelector(
     (state) => state.handlePopUp.componentToRender
   );
+  const nodes = useSelector((state) => state.handleNode.nodes);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    onLayout("TB");
-  }, []);
+  const onLoad = (reactFlowInstance) => {
+    setTimeout(() => {
+      onLayout("TB");
+      triggerRef.current.click();
+    }, 0);
+  };
 
   const getLayoutedElements = (elements, direction = "TB") => {
     const isHorizontal = direction === "LR";
     dagreGraph.setGraph({ rankdir: direction });
 
     elements.forEach((el) => {
+      const currNode = nodes.find((node) => node.id === el.id);
+      let currHeight = currNode == null ? 200 : currNode.__rf.height;
+      let currWidth = currNode == null ? 10 : currNode.__rf.width;
       if (isNode(el)) {
-        dagreGraph.setNode(el.id, { width: nodeWidth, height: nodeHeight });
+        dagreGraph.setNode(el.id, {
+          width: currWidth,
+          height: currHeight + 10,
+        });
       } else {
         dagreGraph.setEdge(el.source, el.target);
       }
@@ -57,20 +85,22 @@ const Home = () => {
     dagre.layout(dagreGraph);
 
     return elements.map((el) => {
+      const currNode = nodes.find((node) => node.id === el.id);
+      let currHeight = currNode == null ? 200 : currNode.__rf.height;
+      let currWidth = currNode == null ? 10 : currNode.__rf.width;
       if (isNode(el)) {
         const nodeWithPosition = dagreGraph.node(el.id);
         el.targetPosition = isHorizontal ? "left" : "top";
         el.sourcePosition = isHorizontal ? "right" : "bottom";
         let element = document.getElementById(`${styles.ReactFlowWrapper}`);
         let elementWidth = element == null ? 0 : element.offsetWidth;
-
         el.position = {
           x:
             nodeWithPosition.x -
-            nodeWidth +
+            currWidth / 2 +
             elementWidth / 2 +
             Math.random() / 1000,
-          y: nodeWithPosition.y - nodeHeight / 2,
+          y: nodeWithPosition.y - currHeight / 2,
         };
       }
 
@@ -81,14 +111,11 @@ const Home = () => {
   const layoutedElements = getLayoutedElements(elements);
 
   const [nodeElements, setElements] = useState(layoutedElements);
-  const onLayout = useCallback(
-    (direction) => {
-      const layoutedElements = getLayoutedElements(elements, direction);
-      setElements(layoutedElements);
-    },
-    [elements]
-  );
-  // console.log(typeof componentToRender);
+
+  const onLayout = (direction) => {
+    setElements(getLayoutedElements(elements, direction));
+  };
+
   return (
     <>
       <div id={styles.ReactFlowWrapper}>
@@ -97,10 +124,20 @@ const Home = () => {
             elements={nodeElements}
             edgeTypes={edgeTypes}
             nodeTypes={nodeTypes}
-            // onLoad={onLoad}
-          ></ReactFlow>
+            onLoad={onLoad}
+            nodesDraggable={false}
+          >
+            <NodeDetails />
+            <Background />
+            <MiniMap />
+            <Controls />
+          </ReactFlow>
           <div className="controls">
-            <button id="LayoutButton" onClick={() => onLayout("TB")}>
+            <button
+              id="LayoutButton"
+              onClick={() => onLayout("TB")}
+              ref={triggerRef}
+            >
               vertical layout
             </button>
             <button onClick={() => onLayout("LR")}>horizontal layout</button>
