@@ -58,7 +58,7 @@ const removeConditionNode = (initialElements, nodeId, type) => {
       elementToRemove.push(
         edges.find((el) => el.target == outGoingNodeOfIncorrectNode[0].id)
       );
-      eleToUpdate = outGoingNodeOfCorrectNode;
+      eleToUpdate = outGoingNodeOfCorrectNode[0];
       elementToRemove.push(outGoingNodeOfIncorrectNode[0]);
     }
     elementToRemove.push(nodes.find((el) => el.id == nodeId));
