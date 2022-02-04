@@ -43,7 +43,7 @@ const addNodeWithCondition = (
   const currEdge = edgeId.split("-");
 
   const newNode = {
-    id: `${numberOfNodes++}`,
+    id: `${numberOfNodes + 1}`,
     type: nodeType,
     data: { label: `${nodeType} ${numberOfNodes + 1}` },
     position: { x: 0, y: 0 },
