@@ -130,7 +130,7 @@ const Home = () => {
             <MiniMap />
             <Controls />
           </ReactFlow>
-          <div className="controls">
+          <div className="controls" style={{ display: "none" }}>
             <button
               id="LayoutButton"
               onClick={() => onLayout("TB")}
