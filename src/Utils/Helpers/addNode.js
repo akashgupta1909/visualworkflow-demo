@@ -22,7 +22,6 @@ const addNode = (initialElements, edgeId, nodeType, isCondition, alignment) => {
       return addNodeWithCondtionLeaf(initialElements, edgeId, nodeType);
     }
   }
-  return initialElements;
 };
 
 const addNodeWithCondition = (
@@ -31,10 +30,20 @@ const addNodeWithCondition = (
   nodeType,
   remainingNodeAttachment
 ) => {
-  const numberOfNodes = initialElements.filter((el) => isNode(el)).length;
+  let numberOfNodes = 0;
+  for (let i = 0; i < initialElements.length; i++) {
+    if (isNode(initialElements[i])) {
+      if (numberOfNodes < initialElements[i].id) {
+        numberOfNodes = initialElements[i].id;
+        numberOfNodes = parseInt(numberOfNodes);
+      }
+    }
+  }
+  // let numberOfNodes = initialElements.filter((el) => isNode(el)).length;
   const currEdge = edgeId.split("-");
+
   const newNode = {
-    id: `${numberOfNodes + 1}`,
+    id: `${numberOfNodes++}`,
     type: nodeType,
     data: { label: `${nodeType} ${numberOfNodes + 1}` },
     position: { x: 0, y: 0 },
@@ -119,7 +128,17 @@ const addNodeWithCondition = (
 };
 
 const addNodeWithCondtionLeaf = (initialElements, nodeId, nodeType) => {
-  const numberOfNodes = initialElements.filter((el) => isNode(el)).length;
+  // let numberOfNodes = initialElements.filter((el) => isNode(el)).length;
+  let numberOfNodes = 0;
+  for (let i = 0; i < initialElements.length; i++) {
+    if (isNode(initialElements[i])) {
+      if (numberOfNodes < initialElements[i].id) {
+        numberOfNodes = initialElements[i].id;
+        numberOfNodes = parseInt(numberOfNodes);
+      }
+    }
+  }
+
   const newNode = {
     id: `${numberOfNodes + 1}`,
     type: nodeType,
@@ -191,7 +210,16 @@ const addNodeWithCondtionLeaf = (initialElements, nodeId, nodeType) => {
 };
 
 const addNodeWithNoCondition = (initialElements, edgeId, nodeType) => {
-  const numberOfNodes = initialElements.filter((el) => isNode(el)).length;
+  // let numberOfNodes = initialElements.filter((el) => isNode(el)).length;
+  let numberOfNodes = 0;
+  for (let i = 0; i < initialElements.length; i++) {
+    if (isNode(initialElements[i])) {
+      if (numberOfNodes < initialElements[i].id) {
+        numberOfNodes = initialElements[i].id;
+        numberOfNodes = parseInt(numberOfNodes);
+      }
+    }
+  }
   const currEdge = edgeId.split("-");
   const newNode = {
     id: `${numberOfNodes + 1}`,
@@ -222,7 +250,16 @@ const addNodeWithNoCondition = (initialElements, edgeId, nodeType) => {
 };
 
 const addNodeWithNoConditionLeaf = (initialElements, nodeId, nodeType) => {
-  const numberOfNodes = initialElements.filter((el) => isNode(el)).length;
+  // let numberOfNodes = initialElements.filter((el) => isNode(el)).length;
+  let numberOfNodes = 0;
+  for (let i = 0; i < initialElements.length; i++) {
+    if (isNode(initialElements[i])) {
+      if (numberOfNodes < initialElements[i].id) {
+        numberOfNodes = initialElements[i].id;
+        numberOfNodes = parseInt(numberOfNodes);
+      }
+    }
+  }
   const newNode = {
     id: `${numberOfNodes + 1}`,
     type: nodeType,

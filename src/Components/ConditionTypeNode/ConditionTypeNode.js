@@ -1,9 +1,15 @@
 import React from "react";
 import { Handle } from "react-flow-renderer";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import removeNode from "../../Utils/Helpers/removeNode";
+import ButtonCross from "../ButtonCross";
 import styles from "./ConditionTypeNode.module.css";
 
-function ConditionTypeNode() {
+function ConditionTypeNode({ id, type }) {
+  const initialElements = useSelector(
+    (state) => state.handleNode.initialElements
+  );
+
   const dispatch = useDispatch();
   const handleOnClick = (event) => {
     event.stopPropagation();
@@ -11,6 +17,23 @@ function ConditionTypeNode() {
 
   return (
     <div className={styles.WrapperWrapper}>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "flex-end",
+        }}
+      >
+        <ButtonCross
+          onClick={() => {
+            const tempEle = removeNode(initialElements, id, type);
+            dispatch({ type: "INITIAL_ELEMENTS", initialElements: tempEle });
+            setTimeout(() => {
+              document.getElementById("LayoutButton").click();
+              document.getElementById("LayoutButton").click();
+            }, 200);
+          }}
+        />
+      </div>
       <div className={styles.Wrapper}>
         <h2 className={styles.Heading}>Condition Workflow</h2>
         <button>Edit Condition</button>

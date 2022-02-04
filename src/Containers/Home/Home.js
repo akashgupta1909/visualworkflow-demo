@@ -87,7 +87,7 @@ const Home = () => {
     return elements.map((el) => {
       const currNode = nodes.find((node) => node.id === el.id);
       let currHeight = currNode == null ? 200 : currNode.__rf.height;
-      let currWidth = currNode == null ? 10 : currNode.__rf.width;
+      let currWidth = currNode == null ? 100 : currNode.__rf.width;
       if (isNode(el)) {
         const nodeWithPosition = dagreGraph.node(el.id);
         el.targetPosition = isHorizontal ? "left" : "top";
@@ -95,11 +95,9 @@ const Home = () => {
         let element = document.getElementById(`${styles.ReactFlowWrapper}`);
         let elementWidth = element == null ? 0 : element.offsetWidth;
         el.position = {
-          x:
-            nodeWithPosition.x -
-            currWidth / 2 +
-            elementWidth / 2 +
-            Math.random() / 1000,
+          x: nodeWithPosition.x - currWidth / 2 + elementWidth / 2 - 75,
+          // elementWidth / 2 +
+          // Math.random() / 1000,
           y: nodeWithPosition.y - currHeight / 2,
         };
       }

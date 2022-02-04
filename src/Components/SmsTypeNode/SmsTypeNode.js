@@ -1,15 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { Handle } from "react-flow-renderer";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import styles from "./SmsTypeNode.module.css";
 import PopUpComponent from "./PopUpComponent";
+import ButtonCross from "../ButtonCross";
+import removeNode from "../../Utils/Helpers/removeNode";
 
-function SmsTypeNode() {
+function SmsTypeNode({ id, type }) {
   const [smsDetails, setSmsDetails] = useState({
     name: "",
     smsBody: "",
   });
   const dispatch = useDispatch();
+  const elements = useSelector((state) => state.handleNode.initialElements);
 
   const handleOnChange = (smsDetails) => {
     setSmsDetails(smsDetails);
@@ -32,6 +35,23 @@ function SmsTypeNode() {
 
   return (
     <div className={styles.WrapperWrapper}>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "flex-end",
+        }}
+      >
+        <ButtonCross
+          onClick={() => {
+            const tempEle = removeNode(elements, id, type);
+            dispatch({ type: "INITIAL_ELEMENTS", initialElements: tempEle });
+            setTimeout(() => {
+              document.getElementById("LayoutButton").click();
+              document.getElementById("LayoutButton").click();
+            }, 200);
+          }}
+        />
+      </div>
       <div className={styles.Wrapper}>
         <h2 className={styles.Heading}>SMS Workflow</h2>
         <button onClick={handleClick}>Edit SMS Details</button>
