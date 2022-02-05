@@ -66,7 +66,8 @@ const Home = () => {
 
   const getLayoutedElements = (elements, direction = "TB") => {
     const isHorizontal = direction === "LR";
-    dagreGraph.setGraph({ rankdir: direction });
+    // dagreGraph.setGraph({ rankdir: direction, ranker: "tight-tree" });
+    dagreGraph.setGraph({ rankdir: direction, ranker: "longest-path" });
 
     elements.forEach((el) => {
       const currNode = nodes.find((node) => node.id === el.id);
